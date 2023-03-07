@@ -1,28 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="" />
+    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="ready">
+      <change afterPath="$PROJECT_DIR$/dataBase/users.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/controllers/user.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/errors/api.error.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/middlewares/user.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/models/user.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/routers/user.router.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/types/common.types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/types/user.types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/user.controller.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/api.error.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middlewares/user.middleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/user.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routers/user.router.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/common.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/user.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="homeWork_1" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2MSQ66ntQr4CH0k4OUIlkreZabN" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mac/IdeaProjects/node_2023_start/node_modules/typescript/lib&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -31,8 +76,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677758325511</updated>
+      <workItem from="1678119047372" duration="969000" />
+      <workItem from="1678120401017" duration="283000" />
+      <workItem from="1678124341826" duration="38000" />
+      <workItem from="1678138787175" duration="426000" />
+      <workItem from="1678139244026" duration="25000" />
+      <workItem from="1678139309838" duration="68000" />
+      <workItem from="1678139438768" duration="980000" />
+      <workItem from="1678176191546" duration="2228000" />
+      <workItem from="1678181382396" duration="7641000" />
+      <workItem from="1678200896555" duration="669000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -44,5 +102,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
