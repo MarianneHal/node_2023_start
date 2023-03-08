@@ -5,7 +5,8 @@ const mongoose_1 = require("mongoose");
 const user_types_1 = require("../types/user.types");
 const userSchema = new mongoose_1.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -20,10 +21,8 @@ const userSchema = new mongoose_1.Schema({
     },
     gender: {
         type: String,
-        enum: user_types_1.EGenders
-    },
-    age: {
-        type: Number
+        enum: user_types_1.EGenders,
+        required: true
     }
 });
 exports.User = (0, mongoose_1.model)("user", userSchema);

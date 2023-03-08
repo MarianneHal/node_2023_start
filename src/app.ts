@@ -26,6 +26,6 @@ app.use((err:IError, req: Request, res:Response, next: NextFunction) => {
 const PORT = 5100;
 
 app.listen(PORT, () => {
-    mongoose.connect('mongodb://127.0.0.1:27017/test/sept-2022')
+    mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority')
     console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
 });

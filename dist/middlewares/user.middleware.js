@@ -10,8 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userMiddleware = void 0;
+const mongoose_1 = require("mongoose");
 const user_model_1 = require("../models/user.model");
 const api_error_1 = require("../errors/api.error");
+const user_validator_1 = require("../validators/user.validator");
 class UserMiddleware {
     getByIdAndThrow(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -21,6 +23,7 @@ class UserMiddleware {
                 if (!user) {
                     throw new api_error_1.ApiError("User not found", 404);
                 }
+                res.locals.user = user;
                 next();
             }
             catch (e) {
@@ -28,16 +31,42 @@ class UserMiddleware {
             }
         });
     }
-    isBodyValid(req, res, next) {
+    isUserValidCreate(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { name, age } = req.body;
-                if (name.length < 3 || typeof name !== 'string') {
-                    throw new api_error_1.ApiError("Wrong name", 400);
+                const { error, value } = user_validator_1.UserValidator.creatUser.validate(req.body);
+                if (error) {
+                    return next(new api_error_1.ApiError(error.message, 404));
                 }
-                if (age < 0 || Number.isNaN(+age)) {
-                    throw new api_error_1.ApiError("Wrong age", 400);
+                req.body = value;
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    isUserIdValid(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!(0, mongoose_1.isObjectIdOrHexString)(req.params.userId)) {
+                    throw new api_error_1.ApiError("ID not valid", 400);
                 }
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    isUserValidUpdate(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { error, value } = user_validator_1.UserValidator.updateUser.validate(req.body);
+                if (error) {
+                    return next(new api_error_1.ApiError(error.message, 404));
+                }
+                req.body = value;
                 next();
             }
             catch (e) {

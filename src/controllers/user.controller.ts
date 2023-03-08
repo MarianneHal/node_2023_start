@@ -9,18 +9,15 @@ class UserController {
            return res.json(users)
     }
 
-    public async getById(req: Request, res: Response, next: NextFunction): Promise<Response<IUser[]>> {
-
-            const {userId} = req.params;
-            const user = User.findById(userId)
-            return res.json(user);
+    public async getById(req: Request, res: Response, next: NextFunction): Promise<Response<IUser>> {
+        const { user } = res.locals;
+        return res.json(user);
 
     }
 
     public async update(req: Request, res: Response, next: NextFunction): Promise<Response<ICommonResponse<IUser>>> {
-            const {userId} = request.params;
-            const user = req.body;
-            const updatedUser = await User.updateOne({_id: userId}, {...user})
+            const {userId} = req.params;
+            const updatedUser = await User.findByIdAndUpdate(userId, {...req.body})
             return res.status(200).json({
                 massage: "User updated",
                 data: updatedUser

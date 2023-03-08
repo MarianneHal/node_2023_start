@@ -8,8 +8,7 @@ export interface IUser {
     name: string,
     email: string,
     password: string,
-    gender: string,
-    age: number
+    gender: string
 }
 
 export interface ICommonResponse<T> {

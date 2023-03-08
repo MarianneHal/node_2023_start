@@ -3,7 +3,8 @@ import {EGenders} from "../types/user.types";
 
 const userSchema = new Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -18,12 +19,9 @@ const userSchema = new Schema({
     },
     gender: {
         type: String,
-        enum: EGenders
-    },
-    age: {
-        type: Number
+        enum: EGenders,
+        required: true
     }
-
 });
 
 export const User = model("user", userSchema)

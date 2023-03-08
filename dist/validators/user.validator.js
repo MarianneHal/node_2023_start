@@ -22,27 +22,27 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const mongoose = __importStar(require("mongoose"));
-const user_router_1 = require("./routers/user.router");
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-app.use('/users', user_router_1.userRouter);
-app.use((err, req, res, next) => {
-    // @ts-ignore
-    const status = err.status;
-    res.status(status).json({
-        message: err.message,
-        status
-    });
+exports.UserValidator = void 0;
+const Joi = __importStar(require("Joi"));
+const regex_constants_1 = require("../constants/regex.constants");
+const user_types_1 = require("../types/user.types");
+class UserValidator {
+}
+exports.UserValidator = UserValidator;
+_a = UserValidator;
+UserValidator.firstName = Joi.string().min(2).max(50).trim();
+UserValidator.email = Joi.string().regex(regex_constants_1.regexConstants.EMAIL).max(50).trim().lowercase();
+UserValidator.password = Joi.string().regex(regex_constants_1.regexConstants.PASSWORD);
+UserValidator.gender = Joi.valid(...Object.values(user_types_1.EGenders));
+UserValidator.creatUser = Joi.object({
+    name: _a.firstName.required(),
+    email: _a.email.required(),
+    password: _a.password.required(),
+    gender: _a.gender.required()
 });
-const PORT = 5100;
-app.listen(PORT, () => {
-    mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority');
-    console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
+UserValidator.updateUser = Joi.object({
+    name: _a.firstName,
+    gender: _a.gender
 });

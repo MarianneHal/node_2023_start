@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userController = void 0;
-const express_1 = require("express");
 const user_model_1 = require("../models/user.model");
 class UserController {
     getAll(req, res, next) {
@@ -21,16 +20,14 @@ class UserController {
     }
     getById(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { userId } = req.params;
-            const user = user_model_1.User.findById(userId);
+            const { user } = res.locals;
             return res.json(user);
         });
     }
     update(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { userId } = express_1.request.params;
-            const user = req.body;
-            const updatedUser = yield user_model_1.User.updateOne({ _id: userId }, Object.assign({}, user));
+            const { userId } = req.params;
+            const updatedUser = yield user_model_1.User.findByIdAndUpdate(userId, Object.assign({}, req.body));
             return res.status(200).json({
                 massage: "User updated",
                 data: updatedUser
