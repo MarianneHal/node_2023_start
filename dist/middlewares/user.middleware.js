@@ -31,6 +31,37 @@ class UserMiddleware {
             }
         });
     }
+    getDynamicallyAndThrow(fieldName, from = 'body', dbField = fieldName) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const fieldValue = req[from][fieldName];
+                const user = yield user_model_1.User.findOne({ [dbField]: fieldValue });
+                if (user) {
+                    throw new api_error_1.ApiError('Not Found', 409);
+                }
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    getDynamicallyOrThrow(fieldName, from = 'body', dbField = fieldName) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const fieldValue = req[from][fieldName];
+                const user = yield user_model_1.User.findOne({ [dbField]: fieldValue });
+                if (!user) {
+                    throw new api_error_1.ApiError('Not Found', 404);
+                }
+                req.res.locals = user;
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
     isUserValidCreate(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -73,6 +104,19 @@ class UserMiddleware {
                 next(e);
             }
         });
+    }
+    // @ts-ignore
+    isValidLogin(req, res, next) {
+        try {
+            const { error } = user_validator_1.UserValidator.loginUser.validate(req.body);
+            if (error) {
+                throw new api_error_1.ApiError(error.message, 400);
+            }
+            next();
+        }
+        catch (e) {
+            next(e);
+        }
     }
 }
 exports.userMiddleware = new UserMiddleware;

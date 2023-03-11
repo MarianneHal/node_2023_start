@@ -22,29 +22,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const mongoose = __importStar(require("mongoose"));
-const user_router_1 = require("./routers/user.router");
-const auth_router_1 = require("./routers/auth.router");
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-app.use('/users', user_router_1.userRouter);
-app.use('/auth', auth_router_1.authRouter);
-app.use((err, req, res, next) => {
-    // @ts-ignore
-    const status = err.status;
-    res.status(status).json({
-        message: err.message,
-        status
-    });
-});
-const PORT = 5100;
-app.listen(PORT, () => {
-    mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority');
-    console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
-});
+exports.tokenServices = void 0;
+const jwt = __importStar(require("jsonwebtoken"));
+class TokenServices {
+    generateTokenPair(payload) {
+        const accessToken = jwt.sign(payload, 'JWT_ACCESS_SECRET', { expiresIn: '15m' });
+        const refreshToken = jwt.sign(payload, 'JWT_REFRESH_SECRET', { expiresIn: '30d' });
+        return {
+            accessToken,
+            refreshToken
+        };
+    }
+}
+exports.tokenServices = new TokenServices();
