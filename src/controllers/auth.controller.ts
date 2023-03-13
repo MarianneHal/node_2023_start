@@ -21,13 +21,28 @@ class AuthController {
         try{
             const {email, password} = req.body
             // @ts-ignore
-            const user = req.res.locals
+            const {user} = req.res.locals
        const tokenPair =  await authService.login({email,password}, user as IUser)
             return res.status(200).json({tokenPair});
         }catch (e){
             next(e)
         }
     }
+
+    public async refresh(req:Request, res: Response, next: NextFunction): Promise<Response<ITokenPair>> {
+        try{
+           // @ts-ignore
+            const {tokenInfo, jwtPayload} = req.res.locals;
+            // @ts-ignore
+            const user = req.res.locals
+            const tokenPair =  await authService.refresh(tokenInfo, jwtPayload)
+            return res.status(200).json(tokenPair);
+        }catch (e){
+            next(e)
+        }
+    }
+
+
 
 }
 

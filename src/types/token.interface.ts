@@ -5,5 +5,5 @@ export interface ITokenPair{
 
 export interface ITokenPayload{
     name: string,
-    id: string
+    _id: string
 }

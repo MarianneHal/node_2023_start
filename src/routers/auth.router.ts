@@ -1,6 +1,7 @@
 import {Router} from "express";
 import {userMiddleware} from "../middlewares/user.middleware";
 import {authController} from "../controllers/auth.controller";
+import {authMiddleware} from "../middlewares/auth.middleware";
 
 
 const router = Router();
@@ -16,5 +17,11 @@ router.post('/login',
         authController.login )
 
 router.post('/login')
+
+
+// @ts-ignore
+router.post('/refresh',
+    authMiddleware.checkRefreshToken,
+    authController.refresh)
 
 export const authRouter = router;

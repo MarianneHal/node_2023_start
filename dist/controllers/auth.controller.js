@@ -29,9 +29,24 @@ class AuthController {
             try {
                 const { email, password } = req.body;
                 // @ts-ignore
-                const user = req.res.locals;
+                const { user } = req.res.locals;
                 const tokenPair = yield auth_services_1.authService.login({ email, password }, user);
                 return res.status(200).json({ tokenPair });
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    refresh(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // @ts-ignore
+                const { tokenInfo, jwtPayload } = req.res.locals;
+                // @ts-ignore
+                const user = req.res.locals;
+                const tokenPair = yield auth_services_1.authService.refresh(tokenInfo, jwtPayload);
+                return res.status(200).json(tokenPair);
             }
             catch (e) {
                 next(e);
