@@ -2,21 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="fix">
-      <change afterPath="$PROJECT_DIR$/dist/Enums/token.enum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enums/token.enum.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/routers/auth.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routers/auth.router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/routers/user.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routers/user.router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/services/token.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/token.services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/middlewares/user.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/middlewares/user.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/auth.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/auth.services.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/auth.router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/user.router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/user.router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/user.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/user.middleware.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/auth.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/token.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/token.services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/token.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/token.interface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +82,8 @@
       <workItem from="1678270406556" duration="355000" />
       <workItem from="1678562676149" duration="11912000" />
       <workItem from="1678579128625" duration="40000" />
-      <workItem from="1678616863233" duration="5191000" />
+      <workItem from="1678616863233" duration="8557000" />
+      <workItem from="1678739912552" duration="1559000" />
     </task>
     <task id="LOCAL-00001" summary="ready">
       <created>1678201582556</created>
@@ -111,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678579157286</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix">
+      <created>1678697234437</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678697234437</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -23,8 +23,7 @@ class AuthService {
                 const createdUser = yield user_model_1.User.create(Object.assign(Object.assign({}, body), { password: hashedPassword }));
             }
             catch (e) {
-                // @ts-ignore
-                throw new api_error_1.ApiError(e.message, e.status);
+                throw new api_error_1.ApiError('User is already', 404);
             }
         });
     }
@@ -35,8 +34,22 @@ class AuthService {
                 if (!isMatched) {
                     throw new api_error_1.ApiError('Invalid date', 404);
                 }
-                const tokenPair = token_services_1.tokenServices.generateTokenPair({ name: user.name, id: user._id });
+                const tokenPair = token_services_1.tokenServices.generateTokenPair({ name: user.name, _id: user._id });
                 yield token_modele_1.Token.create(Object.assign({ _user_id: user._id }, tokenPair));
+                return tokenPair;
+            }
+            catch (e) {
+                // @ts-ignore
+                throw new api_error_1.ApiError(e.message, e.status);
+            }
+        });
+    }
+    refresh(tokenInfo, jwtPayload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const tokenPair = token_services_1.tokenServices.generateTokenPair({ _id: jwtPayload._id, name: jwtPayload.name });
+                yield Promise.all([token_modele_1.Token.create(Object.assign({ _user_id: jwtPayload._id }, tokenPair)),
+                    token_modele_1.Token.deleteOne({ refreshToken: tokenInfo.refreshToken })]);
                 return tokenPair;
             }
             catch (e) {

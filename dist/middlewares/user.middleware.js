@@ -54,7 +54,7 @@ class UserMiddleware {
                 if (!user) {
                     throw new api_error_1.ApiError('Not Found', 404);
                 }
-                req.res.locals = user;
+                req.res.locals = { user };
                 next();
             }
             catch (e) {

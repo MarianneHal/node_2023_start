@@ -1,4 +1,4 @@
-import {NextFunction, Request} from "express";
+import {NextFunction, Request, Response} from "express";
 import {Token} from "../models/token.modele";
 import {ApiError} from "../errors/api.error";
 import {tokenServices} from "../services/token.services";
@@ -6,7 +6,7 @@ import {ETokenType} from "../Enums/token.enum";
 
 
 class AuthMiddleware{
-   public async checkAccessToken(req:Request, res:Response, next:NextFunction) {
+   public async checkAccessToken(req:Request, res:Response, next:NextFunction): Promise<void> {
       try{
          const accessToken = req.get("Authorization");
          if (!accessToken) {
@@ -24,6 +24,7 @@ class AuthMiddleware{
 
          // @ts-ignore
          req.res.locals = {tokenInfo, jwtPayload}
+
 
         next();
       }catch(e){
@@ -46,7 +47,7 @@ class AuthMiddleware{
 
 
          // @ts-ignore
-         req.res.locals = {tokenInfo}
+         req.res.locals = {tokenInfo, jwtPayload}
          next();
       }catch(e){
          next(e)

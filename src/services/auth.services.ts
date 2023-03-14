@@ -6,7 +6,7 @@ import {ICredentials} from "../types/auth.types";
 import {tokenServices} from "./token.services";
 import {ITokenPair, ITokenPayload} from "../types/token.interface";
 import {Token} from "../models/token.modele";
-import {Promise} from "mongoose";
+
 
 class AuthService {
     public async register(body: IUser): Promise<void> {
@@ -14,8 +14,7 @@ class AuthService {
            const hashedPassword = await passwordService.hash(body.password)
             const createdUser = await User.create({...body, password:hashedPassword})
         } catch (e){
-            // @ts-ignore
-            throw new ApiError(e.message, e.status)
+            throw new ApiError('User is already', 404)
         }
     }
 
@@ -27,7 +26,7 @@ class AuthService {
             if(!isMatched) {
                 throw new ApiError('Invalid date', 404)
             }
-        const tokenPair = tokenServices.generateTokenPair({name: user.name, id: user._id})
+        const tokenPair = tokenServices.generateTokenPair({name: user.name, _id: user._id})
             await Token.create({
                 _user_id: user._id,
                 ...tokenPair
@@ -44,7 +43,7 @@ class AuthService {
 
             const  tokenPair = tokenServices.generateTokenPair({_id: jwtPayload._id, name: jwtPayload.name})
 
-           await Promise.all([Token.create({_id: jwtPayload._id, name: jwtPayload.name}),
+           await Promise.all([Token.create({_user_id: jwtPayload._id, ...tokenPair}),
            Token.deleteOne({refreshToken: tokenInfo.refreshToken})])
 
             return tokenPair

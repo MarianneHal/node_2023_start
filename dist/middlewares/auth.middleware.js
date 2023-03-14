@@ -49,7 +49,7 @@ class AuthMiddleware {
                     throw new api_error_1.ApiError('Token is not valid', 401);
                 }
                 // @ts-ignore
-                req.res.locals = { tokenInfo };
+                req.res.locals = { tokenInfo, jwtPayload };
                 next();
             }
             catch (e) {
