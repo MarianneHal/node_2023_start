@@ -6,6 +6,8 @@ import {ICredentials} from "../types/auth.types";
 import {tokenServices} from "./token.services";
 import {ITokenPair, ITokenPayload} from "../types/token.interface";
 import {Token} from "../models/token.modele";
+import {emailService} from "./email.service";
+import {EEmailActions} from "../Enums/email.enum";
 
 
 class AuthService {
@@ -13,6 +15,8 @@ class AuthService {
         try{
            const hashedPassword = await passwordService.hash(body.password)
             const createdUser = await User.create({...body, password:hashedPassword})
+
+            await emailService.sendMail(body.email, EEmailActions.WELCOME)
         } catch (e){
             throw new ApiError('User is already', 404)
         }
