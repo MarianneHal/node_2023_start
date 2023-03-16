@@ -72,8 +72,7 @@ class AuthService {
                 _user_id: user._id
             });
 
-            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})
-        }catch (e) {
+            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})}catch (e) {
             // @ts-ignore
             throw new ApiError(e.message, e.status)
         }

@@ -37,7 +37,7 @@ class EmailService {
             },
             juice: true,
             juiceResources: {
-                webRecources: {
+                webResources: {
                     relativeTo: node_path_1.default.join(process.cwd(), "src", "statics", "css")
                 }
             }
@@ -46,8 +46,8 @@ class EmailService {
     sendMail(email, emailAction, locals = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const templateInfo = email_constans_1.allTemplates[emailAction];
-            locals.frontYrl = 'https://www.youtube.com';
-            const html = yield this.templateParser.render(templateInfo.templateName);
+            locals.frontUrl = 'https://www.youtube.com';
+            const html = yield this.templateParser.render(templateInfo.templateName, locals);
             return this.transporter.sendMail({
                 from: "No reply",
                 to: email,

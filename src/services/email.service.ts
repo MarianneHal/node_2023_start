@@ -29,7 +29,7 @@ class EmailService {
             },
             juice: true,
                 juiceResources: {
-                webRecources:{
+                webResources:{
                     relativeTo: path.join(process.cwd(), "src", "statics", "css")
                 }
         }
@@ -38,9 +38,9 @@ class EmailService {
 
     public async sendMail(email:string, emailAction: EEmailActions, locals: Record<string, string> = {}) {
         const templateInfo = allTemplates[emailAction];
-        locals.frontYrl = 'https://www.youtube.com'
+        locals.frontUrl = 'https://www.youtube.com'
 
-        const html = await this.templateParser.render(templateInfo.templateName);
+        const html = await this.templateParser.render(templateInfo.templateName, locals);
 
         return this.transporter.sendMail({
             from: "No reply",
