@@ -51,5 +51,18 @@ class AuthController {
             }
         });
     }
+    forgotPassword(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // @ts-ignore
+                const { user } = req.res.locals;
+                yield auth_services_1.authService.forgotPassword(user);
+                res.sendStatus(200);
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
 }
 exports.authController = new AuthController();

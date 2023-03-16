@@ -18,6 +18,10 @@ router.post('/login',
 
 router.post('/login')
 
+router.post('/password/forgot',
+    userMiddleware.getDynamicallyAndThrow('email'),
+    authController.forgotPassword
+    )
 
 // @ts-ignore
 router.post('/refresh',

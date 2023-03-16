@@ -16,8 +16,8 @@ class EmailService {
         this.transporter = nodemailer.createTransport({
             service:"gmail",
             auth: {
-                user: '',
-                pass: ''
+                user: 'marianne30011999@gmail.com',
+                pass: 'rnvkxvrwfrwekgwk'
             },
         });
         this.templateParser = new EmailTemplates({
@@ -36,8 +36,9 @@ class EmailService {
         })
     }
 
-    public async sendMail(email:string, emailAction: EEmailActions) {
+    public async sendMail(email:string, emailAction: EEmailActions, locals: Record<string, string> = {}) {
         const templateInfo = allTemplates[emailAction];
+        locals.frontYrl = 'https://www.youtube.com'
 
         const html = await this.templateParser.render(templateInfo.templateName);
 

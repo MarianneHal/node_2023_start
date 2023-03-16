@@ -15,12 +15,17 @@ const password_service_1 = require("./password.service");
 const user_model_1 = require("../models/user.model");
 const token_services_1 = require("./token.services");
 const token_modele_1 = require("../models/token.modele");
+const email_service_1 = require("./email.service");
+const email_enum_1 = require("../Enums/email.enum");
+const action_enum_1 = require("../Enums/action.enum");
+const actionToken_model_1 = require("../models/actionToken.model");
 class AuthService {
     register(body) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const hashedPassword = yield password_service_1.passwordService.hash(body.password);
                 const createdUser = yield user_model_1.User.create(Object.assign(Object.assign({}, body), { password: hashedPassword }));
+                //await emailService.sendMail(body.email, EEmailActions.WELCOME)
             }
             catch (e) {
                 throw new api_error_1.ApiError('User is already', 404);
@@ -51,6 +56,23 @@ class AuthService {
                 yield Promise.all([token_modele_1.Token.create(Object.assign({ _user_id: jwtPayload._id }, tokenPair)),
                     token_modele_1.Token.deleteOne({ refreshToken: tokenInfo.refreshToken })]);
                 return tokenPair;
+            }
+            catch (e) {
+                // @ts-ignore
+                throw new api_error_1.ApiError(e.message, e.status);
+            }
+        });
+    }
+    forgotPassword(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const actionToken = token_services_1.tokenServices.generateActionToken({ _id: user._id }, action_enum_1.EActionTokenType.forgot);
+                yield actionToken_model_1.Action.create({
+                    actionToken,
+                    tokenType: action_enum_1.EActionTokenType.forgot,
+                    _user_id: user._id
+                });
+                yield email_service_1.emailService.sendMail(user.email, email_enum_1.EEmailActions.FORGOT_PASSWORD, { token: actionToken });
             }
             catch (e) {
                 // @ts-ignore

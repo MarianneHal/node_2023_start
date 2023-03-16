@@ -8,6 +8,8 @@ import {ITokenPair, ITokenPayload} from "../types/token.interface";
 import {Token} from "../models/token.modele";
 import {emailService} from "./email.service";
 import {EEmailActions} from "../Enums/email.enum";
+import {EActionTokenType} from "../Enums/action.enum";
+import {Action} from "../models/actionToken.model";
 
 
 class AuthService {
@@ -16,7 +18,7 @@ class AuthService {
            const hashedPassword = await passwordService.hash(body.password)
             const createdUser = await User.create({...body, password:hashedPassword})
 
-            await emailService.sendMail(body.email, EEmailActions.WELCOME)
+            //await emailService.sendMail(body.email, EEmailActions.WELCOME)
         } catch (e){
             throw new ApiError('User is already', 404)
         }
@@ -57,6 +59,25 @@ class AuthService {
         }
     }
 
+    public async forgotPassword(user: IUser): Promise<void> {
+        try{
+            const actionToken = tokenServices.generateActionToken(
+            {_id: user._id},
+            EActionTokenType.forgot
+            );
+
+            await Action.create({
+                actionToken,
+                tokenType: EActionTokenType.forgot,
+                _user_id: user._id
+            });
+
+            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})
+        }catch (e) {
+            // @ts-ignore
+            throw new ApiError(e.message, e.status)
+        }
+    }
 }
 
 export const authService = new AuthService();

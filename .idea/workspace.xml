@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="fix">
-      <change afterPath="$PROJECT_DIR$/src/Enums/email.enum.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/email.constans.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/email.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/statics/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/statics/register.hbs" afterDir="false" />
+    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="nodemailer">
+      <change afterPath="$PROJECT_DIR$/dist/Enums/action.enum.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/Enums/email.enum.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/constants/email.constans.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/models/actionToken.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/services/email.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Enums/action.enum.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/actionToken.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/statics/forgotPassword.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routers/auth.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routers/auth.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/auth.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/auth.services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/token.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/token.services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/user.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/user.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/auth.router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.services.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/email.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/email.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/token.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/token.services.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/token.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/token.interface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,15 +31,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="CSS File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Homework_4" />
+        <entry key="$PROJECT_DIR$" value="Homework_5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,17 +55,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "list.type.of.created.stylesheet": "CSS",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/mac/IdeaProjects/node_2023_start/node_modules/typescript/lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mac/IdeaProjects/node_2023_start/node_modules/typescript/lib&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -85,7 +98,8 @@
       <workItem from="1678616863233" duration="8557000" />
       <workItem from="1678739912552" duration="1559000" />
       <workItem from="1678809840433" duration="1704000" />
-      <workItem from="1678879309216" duration="938000" />
+      <workItem from="1678879309216" duration="1476000" />
+      <workItem from="1678953895254" duration="5295000" />
     </task>
     <task id="LOCAL-00001" summary="ready">
       <created>1678201582556</created>
@@ -122,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678809865315</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="nodemailer">
+      <created>1678880518445</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678880518445</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +164,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="ready" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="nodemailer" />
+    <option name="LAST_COMMIT_MESSAGE" value="nodemailer" />
   </component>
 </project>

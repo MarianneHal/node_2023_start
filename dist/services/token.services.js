@@ -27,6 +27,7 @@ exports.tokenServices = void 0;
 const jwt = __importStar(require("jsonwebtoken"));
 const api_error_1 = require("../errors/api.error");
 const token_enum_1 = require("../Enums/token.enum");
+const action_enum_1 = require("../Enums/action.enum");
 class TokenServices {
     generateTokenPair(payload) {
         const accessToken = jwt.sign(payload, 'JWT_ACCESS_SECRET', { expiresIn: '15m' });
@@ -51,6 +52,18 @@ class TokenServices {
         catch (e) {
             throw new api_error_1.ApiError('Token is not valid', 401);
         }
+    }
+    generateActionToken(payload, tokenType) {
+        let secret = '';
+        switch (tokenType) {
+            case action_enum_1.EActionTokenType.activate:
+                secret = 'activateSecret';
+                break;
+            case action_enum_1.EActionTokenType.forgot:
+                secret = 'forgotSecret';
+                break;
+        }
+        return jwt.sign(payload, secret, { expiresIn: "7d" });
     }
 }
 exports.tokenServices = new TokenServices();
