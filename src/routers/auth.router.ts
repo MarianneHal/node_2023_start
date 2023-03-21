@@ -30,6 +30,7 @@ router.post('/password/forgot',
 router.put(
     '/password/forgot/:token',
     authMiddleware.checkActiinForgotToken,
+    authMiddleware.checkOldPassword,
     authController.setForgotPassword
 )
 

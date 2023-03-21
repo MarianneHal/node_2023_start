@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="Crone">
-      <change afterPath="$PROJECT_DIR$/src/models/Old.password.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.services.ts" afterDir="false" />
-    </list>
+    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="OldPassword" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +81,7 @@
       <workItem from="1678953895254" duration="8688000" />
       <workItem from="1679148752349" duration="5754000" />
       <workItem from="1679301944756" duration="241000" />
-      <workItem from="1679380601658" duration="3430000" />
+      <workItem from="1679380601658" duration="3449000" />
     </task>
     <task id="LOCAL-00001" summary="ready">
       <created>1678201582556</created>
@@ -157,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679382473804</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="OldPassword">
+      <created>1679384054422</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679384054422</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +185,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="ActivateToken" />
     <MESSAGE value="Crone" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crone" />
+    <MESSAGE value="OldPassword" />
+    <option name="LAST_COMMIT_MESSAGE" value="OldPassword" />
   </component>
 </project>
