@@ -16,6 +16,9 @@ const tokenSchema = new mongoose_1.Schema({
     refreshToken: {
         type: String,
         required: true
-    }
+    },
+}, {
+    versionKey: false,
+    timestamps: true
 });
 exports.Token = (0, mongoose_1.model)("Token", tokenSchema);

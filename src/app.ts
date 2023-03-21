@@ -5,6 +5,7 @@ import * as mongoose from "mongoose";
 import {userRouter} from "./routers/user.router";
 import {IError} from "./types/common.types";
 import {authRouter} from "./routers/auth.router";
+import {cronRunner} from "./crons";
 
 
 const app = express();
@@ -29,5 +30,6 @@ const PORT = 5100;
 
 app.listen(PORT, () => {
     mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority')
+    cronRunner()
     console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
 });

@@ -1,7 +1,8 @@
 import {Schema, model, Types} from "mongoose";
+
 import {User} from "./user.model";
 
-const tokenSchema =new Schema({
+const tokenSchema = new Schema({
     _user_id: {
         type: Types.ObjectId,
         ref: User,
@@ -14,7 +15,12 @@ const tokenSchema =new Schema({
     refreshToken: {
         type: String,
         required: true
+    },
+    },
+    {
+        versionKey: false,
+        timestamps: true
     }
-})
+)
 
 export const Token = model( "Token", tokenSchema)

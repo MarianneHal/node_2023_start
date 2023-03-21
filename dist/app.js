@@ -30,6 +30,7 @@ const express_1 = __importDefault(require("express"));
 const mongoose = __importStar(require("mongoose"));
 const user_router_1 = require("./routers/user.router");
 const auth_router_1 = require("./routers/auth.router");
+const crons_1 = require("./crons");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -46,5 +47,6 @@ app.use((err, req, res, next) => {
 const PORT = 5100;
 app.listen(PORT, () => {
     mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority');
+    (0, crons_1.cronRunner)();
     console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
 });

@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="fix">
-      <change afterPath="$PROJECT_DIR$/dist/Enums/status.enum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/middlewares/common.middleware.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enums/status.enum.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/middlewares/common.middleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/statics/activate.hbs" afterDir="false" />
+    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="ActivateToken">
+      <change afterPath="$PROJECT_DIR$/dist/crons/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/crons/remove.old.token.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/crons/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/crons/remove.old.token.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Enums/email.enum.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Enums/email.enum.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/constants/email.constans.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/constants/email.constans.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/models/user.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/user.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/routers/auth.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routers/auth.router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/services/auth.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/auth.services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/services/token.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/token.services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/validators/user.validator.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/validators/user.validator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enums/email.enum.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enums/email.enum.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/email.constans.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/email.constans.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/user.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/user.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/auth.router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/token.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/token.services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/user.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/user.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validators/user.validator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/user.validator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/models/token.modele.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/token.modele.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/token.modele.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/token.modele.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Homework_5" />
+        <entry key="$PROJECT_DIR$" value="Homework_6" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,6 +92,7 @@
       <workItem from="1678953895254" duration="8688000" />
       <workItem from="1679148752349" duration="5754000" />
       <workItem from="1679301944756" duration="241000" />
+      <workItem from="1679380601658" duration="1819000" />
     </task>
     <task id="LOCAL-00001" summary="ready">
       <created>1678201582556</created>
@@ -164,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678963228046</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ActivateToken">
+      <created>1679380656887</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679380656887</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +180,7 @@
     <MESSAGE value="nodemailer" />
     <MESSAGE value="forgotPassword" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="ActivateToken" />
+    <option name="LAST_COMMIT_MESSAGE" value="ActivateToken" />
   </component>
 </project>
