@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="ActivateToken">
-      <change afterPath="$PROJECT_DIR$/dist/crons/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/crons/remove.old.token.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/crons/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/crons/remove.old.token.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/models/token.modele.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/models/token.modele.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/token.modele.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/token.modele.ts" afterDir="false" />
+    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="Crone">
+      <change afterPath="$PROJECT_DIR$/src/models/Old.password.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.services.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +85,7 @@
       <workItem from="1678953895254" duration="8688000" />
       <workItem from="1679148752349" duration="5754000" />
       <workItem from="1679301944756" duration="241000" />
-      <workItem from="1679380601658" duration="1819000" />
+      <workItem from="1679380601658" duration="3430000" />
     </task>
     <task id="LOCAL-00001" summary="ready">
       <created>1678201582556</created>
@@ -157,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679380656887</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Crone">
+      <created>1679382473804</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679382473804</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +181,7 @@
     <MESSAGE value="forgotPassword" />
     <MESSAGE value="fix" />
     <MESSAGE value="ActivateToken" />
-    <option name="LAST_COMMIT_MESSAGE" value="ActivateToken" />
+    <MESSAGE value="Crone" />
+    <option name="LAST_COMMIT_MESSAGE" value="Crone" />
   </component>
 </project>

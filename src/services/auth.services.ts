@@ -11,6 +11,7 @@ import {EEmailActions} from "../Enums/email.enum";
 import {EActionTokenType} from "../Enums/action.enum";
 import {Action} from "../models/actionToken.model";
 import {EUserStatus} from "../Enums/status.enum";
+import {OldPassword} from "../models/Old.password.model";
 
 class AuthService {
     public async register(body: IUser): Promise<void> {
@@ -60,10 +61,10 @@ class AuthService {
     }
 
     public async forgotPassword(user: IUser): Promise<void> {
-        try{
+        try {
             const actionToken = tokenServices.generateActionToken(
-            {_id: user._id},
-            EActionTokenType.forgot
+                {_id: user._id},
+                EActionTokenType.forgot
             );
 
             await Action.create({
@@ -72,7 +73,10 @@ class AuthService {
                 _user_id: user._id
             });
 
-            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})}
+            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})
+            await OldPassword.create({_user_id: user._id, password: user.password});
+        }
+
         catch (e) {
             // @ts-ignore
             throw new ApiError(e.message, e.status)
