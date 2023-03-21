@@ -10,5 +10,9 @@ exports.allTemplates = {
     [email_enum_1.EEmailActions.FORGOT_PASSWORD]: {
         subject: "WE CONTROL YOUR PASSWORD",
         templateName: "forgotPassword"
+    },
+    [email_enum_1.EEmailActions.ACTIVATE]: {
+        subject: "Activate!",
+        templateName: "activate",
     }
 };

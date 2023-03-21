@@ -2,6 +2,9 @@ import {Router} from "express";
 import {userMiddleware} from "../middlewares/user.middleware";
 import {authController} from "../controllers/auth.controller";
 import {authMiddleware} from "../middlewares/auth.middleware";
+import {commonMiddleware} from "../middlewares/common.middleware";
+import {UserValidator} from "../validators/user.validator";
+import {EActionTokenType} from "../Enums/action.enum";
 
 
 const router = Router();
@@ -19,13 +22,34 @@ router.post('/login',
 router.post('/login')
 
 router.post('/password/forgot',
-    userMiddleware.getDynamicallyAndThrow('email'),
+    userMiddleware.getDynamicallyOrThrow('email'),
     authController.forgotPassword
     )
 
-// @ts-ignore
-router.post('/refresh',
+
+router.put(
+    '/password/forgot/:token',
+    authMiddleware.checkActiinForgotToken,
+    authController.setForgotPassword
+)
+
+router.post(
+    "/activate",
+    commonMiddleware.isBodyValid(UserValidator.emailValidator),
+    userMiddleware.getDynamicallyOrThrow("email"),
+    authController.sendActivateToken
+);
+
+router.put(
+    `/activate/:token`,
+    authMiddleware.checkActionToken(EActionTokenType.activate),
+    authController.activate
+);
+
+router.post(
+    "/refresh",
     authMiddleware.checkRefreshToken,
-    authController.refresh)
+    authController.refresh
+);
 
 export const authRouter = router;

@@ -19,6 +19,7 @@ const email_service_1 = require("./email.service");
 const email_enum_1 = require("../Enums/email.enum");
 const action_enum_1 = require("../Enums/action.enum");
 const actionToken_model_1 = require("../models/actionToken.model");
+const status_enum_1 = require("../Enums/status.enum");
 class AuthService {
     register(body) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -73,6 +74,54 @@ class AuthService {
                     _user_id: user._id
                 });
                 yield email_service_1.emailService.sendMail(user.email, email_enum_1.EEmailActions.FORGOT_PASSWORD, { token: actionToken });
+            }
+            catch (e) {
+                // @ts-ignore
+                throw new api_error_1.ApiError(e.message, e.status);
+            }
+        });
+    }
+    setForgotPassword(password, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const hashedPassword = yield password_service_1.passwordService.hash(password);
+                yield user_model_1.User.updateOne({ _id: id }, { password: hashedPassword });
+            }
+            catch (e) {
+                // @ts-ignore
+                throw new api_error_1.ApiError(e.message, e.status);
+            }
+        });
+    }
+    sendActivateToken(user) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const actionToken = token_services_1.tokenServices.generateActionToken({ _id: user._id }, action_enum_1.EActionTokenType.activate);
+                yield actionToken_model_1.Action.create({
+                    actionToken,
+                    tokenType: action_enum_1.EActionTokenType.activate,
+                    _user_id: user._id,
+                });
+                yield email_service_1.emailService.sendMail(user.email, email_enum_1.EEmailActions.ACTIVATE, {
+                    token: actionToken,
+                });
+            }
+            catch (e) {
+                // @ts-ignore
+                throw new api_error_1.ApiError(e.message, e.status);
+            }
+        });
+    }
+    activate(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield Promise.all([
+                    user_model_1.User.updateOne({ _id: userId }, { $set: { status: status_enum_1.EUserStatus.active } }),
+                    token_modele_1.Token.deleteMany({
+                        _user_id: userId,
+                        tokenType: action_enum_1.EActionTokenType.activate,
+                    }),
+                ]);
             }
             catch (e) {
                 // @ts-ignore

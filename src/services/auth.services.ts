@@ -10,7 +10,7 @@ import {emailService} from "./email.service";
 import {EEmailActions} from "../Enums/email.enum";
 import {EActionTokenType} from "../Enums/action.enum";
 import {Action} from "../models/actionToken.model";
-
+import {EUserStatus} from "../Enums/status.enum";
 
 class AuthService {
     public async register(body: IUser): Promise<void> {
@@ -72,11 +72,64 @@ class AuthService {
                 _user_id: user._id
             });
 
-            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})}catch (e) {
+            await emailService.sendMail(user.email, EEmailActions.FORGOT_PASSWORD, {token: actionToken})}
+        catch (e) {
             // @ts-ignore
             throw new ApiError(e.message, e.status)
         }
     }
+
+    public async setForgotPassword(password: string, id:string): Promise<void>{
+        try{
+            const hashedPassword = await passwordService.hash(password)
+
+            await User.updateOne({_id: id}, {password: hashedPassword})
+
+        }catch (e) {
+            // @ts-ignore
+            throw new ApiError(e.message, e.status);
+        }
+    }
+
+    public async sendActivateToken(user: IUser): Promise<void> {
+        try {
+            const actionToken = tokenServices.generateActionToken(
+                { _id: user._id },
+                EActionTokenType.activate
+            );
+            await Action.create({
+                actionToken,
+                tokenType: EActionTokenType.activate,
+                _user_id: user._id,
+            });
+
+            await emailService.sendMail(user.email, EEmailActions.ACTIVATE, {
+                token: actionToken,
+            });
+        } catch (e) {
+            // @ts-ignore
+            throw new ApiError(e.message, e.status);
+        }
+    }
+
+    public async activate(userId: string): Promise<void> {
+        try {
+            await Promise.all([
+                User.updateOne(
+                    { _id: userId },
+                    { $set: { status: EUserStatus.active } }
+                ),
+                Token.deleteMany({
+                    _user_id: userId,
+                    tokenType: EActionTokenType.activate,
+                }),
+            ]);
+        } catch (e) {
+            // @ts-ignore
+            throw new ApiError(e.message, e.status);
+        }
+    }
 }
+
 
 export const authService = new AuthService();

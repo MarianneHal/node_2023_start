@@ -65,5 +65,22 @@ class TokenServices {
         }
         return jwt.sign(payload, secret, { expiresIn: "7d" });
     }
+    checkActionToken(token, tokenType) {
+        try {
+            let secret = '';
+            switch (tokenType) {
+                case action_enum_1.EActionTokenType.activate:
+                    secret = 'activateSecret';
+                    break;
+                case action_enum_1.EActionTokenType.forgot:
+                    secret = 'forgotSecret';
+                    break;
+            }
+            return jwt.verify(token, secret);
+        }
+        catch (e) {
+            throw new api_error_1.ApiError("token is not valid", 401);
+        }
+    }
 }
 exports.tokenServices = new TokenServices();

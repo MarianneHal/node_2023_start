@@ -14,6 +14,8 @@ const token_modele_1 = require("../models/token.modele");
 const api_error_1 = require("../errors/api.error");
 const token_services_1 = require("../services/token.services");
 const token_enum_1 = require("../Enums/token.enum");
+const action_enum_1 = require("../Enums/action.enum");
+const actionToken_model_1 = require("../models/actionToken.model");
 class AuthMiddleware {
     checkAccessToken(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -47,6 +49,47 @@ class AuthMiddleware {
                 const tokenInfo = yield token_modele_1.Token.findOne({ refreshToken });
                 if (!tokenInfo) {
                     throw new api_error_1.ApiError('Token is not valid', 401);
+                }
+                // @ts-ignore
+                req.res.locals = { tokenInfo, jwtPayload };
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    checkActiinForgotToken(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const actionToken = req.params.token;
+                if (!actionToken)
+                    throw new api_error_1.ApiError("No token", 401);
+                const jwtPayload = token_services_1.tokenServices.checkActionToken(actionToken, action_enum_1.EActionTokenType.forgot);
+                const tokenInfo = yield actionToken_model_1.Action.findOne({ actionToken });
+                if (!tokenInfo) {
+                    throw new api_error_1.ApiError("Token is not valid", 401);
+                }
+                // @ts-ignore
+                req.res.locals = { tokenInfo, jwtPayload };
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    checkActionToken(type) {
+        return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const actionToken = req.params.token;
+                if (!actionToken) {
+                    throw new api_error_1.ApiError("No token", 401);
+                }
+                const jwtPayload = token_services_1.tokenServices.checkActionToken(actionToken, type);
+                const tokenInfo = yield actionToken_model_1.Action.findOne({ actionToken });
+                if (!tokenInfo) {
+                    throw new api_error_1.ApiError("Token not valid", 401);
                 }
                 // @ts-ignore
                 req.res.locals = { tokenInfo, jwtPayload };

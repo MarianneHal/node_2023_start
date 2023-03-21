@@ -5,4 +5,5 @@ var EEmailActions;
 (function (EEmailActions) {
     EEmailActions[EEmailActions["WELCOME"] = 0] = "WELCOME";
     EEmailActions[EEmailActions["FORGOT_PASSWORD"] = 1] = "FORGOT_PASSWORD";
+    EEmailActions[EEmailActions["ACTIVATE"] = 2] = "ACTIVATE";
 })(EEmailActions = exports.EEmailActions || (exports.EEmailActions = {}));

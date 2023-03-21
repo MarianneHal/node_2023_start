@@ -64,5 +64,46 @@ class AuthController {
             }
         });
     }
+    setForgotPassword(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { password } = req.body;
+                // @ts-ignore
+                const { tokenInfo } = req.res.locals;
+                yield auth_services_1.authService.setForgotPassword(password, tokenInfo._user_id);
+                res.sendStatus(200);
+                next();
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    sendActivateToken(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // @ts-ignore
+                const { user } = req.res.locals;
+                yield auth_services_1.authService.sendActivateToken(user);
+                res.sendStatus(204);
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
+    activate(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // @ts-ignore
+                const { _id } = req.res.locals.jwtPayload;
+                yield auth_services_1.authService.activate(_id);
+                res.sendStatus(204);
+            }
+            catch (e) {
+                next(e);
+            }
+        });
+    }
 }
 exports.authController = new AuthController();

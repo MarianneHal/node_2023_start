@@ -9,7 +9,8 @@ export interface IUser {
     name: string,
     email: string,
     password: string,
-    gender: string
+    gender: string,
+    status:string
 }
 
 export interface ICommonResponse<T> {

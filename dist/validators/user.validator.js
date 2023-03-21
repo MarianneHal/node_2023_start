@@ -46,6 +46,9 @@ UserValidator.updateUser = Joi.object({
     name: _a.firstName,
     gender: _a.gender
 });
+UserValidator.emailValidator = Joi.object({
+    email: _a.email.required(),
+});
 UserValidator.loginUser = Joi.object({
     email: _a.email.required(),
     password: _a.password.required()

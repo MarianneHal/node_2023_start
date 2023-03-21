@@ -47,6 +47,25 @@ class TokenServices {
 
         return jwt.sign(payload, secret, {expiresIn: "7d"})
     }
+
+    public checkActionToken(token: string, tokenType: EActionTokenType) {
+        try{
+            let secret = '';
+
+            switch (tokenType) {
+                case EActionTokenType.activate:
+                    secret = 'activateSecret';
+                    break;
+                case EActionTokenType.forgot:
+                    secret = 'forgotSecret'
+                    break;
+            }
+            return jwt.verify(token, secret) as IActionTokenPayload
+        }catch(e) {
+            throw new ApiError("token is not valid", 401)
+        }
+    }
+
 }
 
 export const tokenServices = new TokenServices();
