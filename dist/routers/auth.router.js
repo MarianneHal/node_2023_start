@@ -13,7 +13,7 @@ router.post('/register', user_middleware_1.userMiddleware.isUserValidCreate, use
 router.post('/login', user_middleware_1.userMiddleware.isValidLogin, user_middleware_1.userMiddleware.getDynamicallyOrThrow('email'), auth_controller_1.authController.login);
 router.post('/login');
 router.post('/password/forgot', user_middleware_1.userMiddleware.getDynamicallyOrThrow('email'), auth_controller_1.authController.forgotPassword);
-router.put('/password/forgot/:token', auth_middleware_1.authMiddleware.checkActiinForgotToken, auth_controller_1.authController.setForgotPassword);
+router.put('/password/forgot/:token', auth_middleware_1.authMiddleware.checkActiinForgotToken, auth_middleware_1.authMiddleware.checkOldPassword, auth_controller_1.authController.setForgotPassword);
 router.post("/activate", common_middleware_1.commonMiddleware.isBodyValid(user_validator_1.UserValidator.emailValidator), user_middleware_1.userMiddleware.getDynamicallyOrThrow("email"), auth_controller_1.authController.sendActivateToken);
 router.put(`/activate/:token`, auth_middleware_1.authMiddleware.checkActionToken(action_enum_1.EActionTokenType.activate), auth_controller_1.authController.activate);
 router.post("/refresh", auth_middleware_1.authMiddleware.checkRefreshToken, auth_controller_1.authController.refresh);

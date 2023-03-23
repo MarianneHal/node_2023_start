@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="OldPassword" />
+    <list default="true" id="48e3201c-aacc-4e79-b0a2-78d46c32d078" name="Changes" comment="fix">
+      <change afterPath="$PROJECT_DIR$/dist/models/Old.password.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/services/auth.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/services/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/services/token.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/services/user.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/types/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/types/pagination.interface.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/user.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/pagination.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/auth.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/controllers/user.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/controllers/user.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/crons/remove.old.token.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/crons/remove.old.token.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/middlewares/auth.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/middlewares/user.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/middlewares/user.middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routers/auth.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routers/auth.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/routers/user.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/routers/user.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/auth.services.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/email.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/email.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/password.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/services/password.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/services/token.services.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/user.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/auth.middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/user.router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/user.router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/token.services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/token.service.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +113,9 @@
       <workItem from="1679148752349" duration="5754000" />
       <workItem from="1679301944756" duration="241000" />
       <workItem from="1679380601658" duration="3449000" />
+      <workItem from="1679384064762" duration="65000" />
+      <workItem from="1679566309318" duration="1762000" />
+      <workItem from="1679568080019" duration="3072000" />
     </task>
     <task id="LOCAL-00001" summary="ready">
       <created>1678201582556</created>
@@ -160,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679384054422</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix">
+      <created>1679384117808</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679384117808</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,10 +223,10 @@
     <MESSAGE value="ready" />
     <MESSAGE value="nodemailer" />
     <MESSAGE value="forgotPassword" />
-    <MESSAGE value="fix" />
     <MESSAGE value="ActivateToken" />
     <MESSAGE value="Crone" />
     <MESSAGE value="OldPassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="OldPassword" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>

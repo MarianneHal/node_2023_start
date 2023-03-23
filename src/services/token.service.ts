@@ -4,7 +4,7 @@ import {ApiError} from "../errors/api.error";
 import {ETokenType} from "../Enums/token.enum";
 import {EActionTokenType} from "../Enums/action.enum";
 
-class TokenServices {
+class TokenService {
     public generateTokenPair(payload: ITokenPayload): ITokenPair {
         const accessToken = jwt.sign(payload, 'JWT_ACCESS_SECRET', {expiresIn: '15m'});
         const refreshToken = jwt.sign(payload, 'JWT_REFRESH_SECRET', {expiresIn: '30d'});
@@ -68,4 +68,4 @@ class TokenServices {
 
 }
 
-export const tokenServices = new TokenServices();
+export const tokenServices = new TokenService();

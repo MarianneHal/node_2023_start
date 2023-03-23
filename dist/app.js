@@ -37,7 +37,6 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/users', user_router_1.userRouter);
 app.use('/auth', auth_router_1.authRouter);
 app.use((err, req, res, next) => {
-    // @ts-ignore
     const status = err.status;
     res.status(status).json({
         message: err.message,

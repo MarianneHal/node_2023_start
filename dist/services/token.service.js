@@ -28,7 +28,7 @@ const jwt = __importStar(require("jsonwebtoken"));
 const api_error_1 = require("../errors/api.error");
 const token_enum_1 = require("../Enums/token.enum");
 const action_enum_1 = require("../Enums/action.enum");
-class TokenServices {
+class TokenService {
     generateTokenPair(payload) {
         const accessToken = jwt.sign(payload, 'JWT_ACCESS_SECRET', { expiresIn: '15m' });
         const refreshToken = jwt.sign(payload, 'JWT_REFRESH_SECRET', { expiresIn: '30d' });
@@ -83,4 +83,4 @@ class TokenServices {
         }
     }
 }
-exports.tokenServices = new TokenServices();
+exports.tokenServices = new TokenService();

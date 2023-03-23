@@ -1,8 +1,8 @@
 import {NextFunction, Response, Request} from "express";
-import {authService} from "../services/auth.services";
 
+import {authService} from "../services/auth.service";
 import {IUser} from "../types/user.types";
-import {ITokenPair} from "../types/token.interface";
+
 
 
 class AuthController {

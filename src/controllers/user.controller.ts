@@ -1,11 +1,14 @@
-import {NextFunction, request, Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 
 import {User} from "../models/user.model";
-import {ICommonResponse, IUser} from "../types/user.types";
+import {ICommonResponse, IUser} from "../types";
+import {userService} from "../services";
+
 
 class UserController {
+
     public async getAll(req: Request, res: Response, next: NextFunction): Promise<Response<IUser[]>> {
-           const users = await User.find();
+           const users = await userService.getWithPagination(req.query);
            return res.json(users)
     }
 

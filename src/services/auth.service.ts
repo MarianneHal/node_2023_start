@@ -1,10 +1,10 @@
 import {ApiError} from "../errors/api.error";
-import {IUser} from "../types/user.types";
+import {IUser} from "../types";
 import {passwordService} from "./password.service";
 import {User} from "../models/user.model";
-import {ICredentials} from "../types/auth.types";
-import {tokenServices} from "./token.services";
-import {ITokenPair, ITokenPayload} from "../types/token.interface";
+import {ICredentials} from "../types";
+import {tokenServices} from "./token.service";
+import {ITokenPair, ITokenPayload} from "../types";
 import {Token} from "../models/token.modele";
 import {emailService} from "./email.service";
 import {EEmailActions} from "../Enums/email.enum";
@@ -16,8 +16,9 @@ import {OldPassword} from "../models/Old.password.model";
 class AuthService {
     public async register(body: IUser): Promise<void> {
         try{
-           const hashedPassword = await passwordService.hash(body.password)
-            const createdUser = await User.create({...body, password:hashedPassword})
+            const {password} = body;
+           const hashedPassword = await passwordService.hash(password);
+           await User.create({...body, password:hashedPassword})
 
             //await emailService.sendMail(body.email, EEmailActions.WELCOME)
         } catch (e){
@@ -55,7 +56,7 @@ class AuthService {
 
             return tokenPair
         } catch(e) {
-            // @ts-ignore
+
             throw new ApiError(e.message, e.status)
         }
     }
@@ -78,7 +79,7 @@ class AuthService {
         }
 
         catch (e) {
-            // @ts-ignore
+
             throw new ApiError(e.message, e.status)
         }
     }
@@ -111,7 +112,7 @@ class AuthService {
                 token: actionToken,
             });
         } catch (e) {
-            // @ts-ignore
+
             throw new ApiError(e.message, e.status);
         }
     }
@@ -129,7 +130,6 @@ class AuthService {
                 }),
             ]);
         } catch (e) {
-            // @ts-ignore
             throw new ApiError(e.message, e.status);
         }
     }
