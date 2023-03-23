@@ -27,13 +27,15 @@ class UserController {
             })
     }
 
-    public async create(req: Request, res: Response, next: NextFunction): Promise<Response<ICommonResponse<IUser>>> {
-        const body = req.body;
-        const user = await User.create(body);
+    public async create(req: Request, res: Response, next: NextFunction): Promise<Response<ICommonResponse<IUser>>>{
+        try{
+            await User.createUserWithHashPassword(req.body)
         return res.status(200).json({
-            message: "User created",
-            data: user
-        })
+            message: "User created"
+        })}catch (e) {
+            next(e)
+        }
+
     }
 
     public async delete(req: Request, res: Response, next: NextFunction): Promise<Response<ICommonResponse<IUser>>>{

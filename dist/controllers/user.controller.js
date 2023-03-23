@@ -21,12 +21,15 @@ class UserController {
         });
     }
     async create(req, res, next) {
-        const body = req.body;
-        const user = await user_model_1.User.create(body);
-        return res.status(200).json({
-            message: "User created",
-            data: user
-        });
+        try {
+            await user_model_1.User.createUserWithHashPassword(req.body);
+            return res.status(200).json({
+                message: "User created"
+            });
+        }
+        catch (e) {
+            next(e);
+        }
     }
     async delete(req, res, next) {
         const { userId } = req.params;

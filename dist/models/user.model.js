@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const mongoose_1 = require("mongoose");
-const user_types_1 = require("../types/user.types");
+const types_1 = require("../types");
 const status_enum_1 = require("../Enums/status.enum");
+const services_1 = require("../services");
 const userSchema = new mongoose_1.Schema({
     name: {
         type: String,
@@ -22,7 +23,7 @@ const userSchema = new mongoose_1.Schema({
     },
     gender: {
         type: String,
-        enum: user_types_1.EGenders,
+        enum: types_1.EGenders,
         required: true
     },
     status: {
@@ -31,4 +32,14 @@ const userSchema = new mongoose_1.Schema({
         default: status_enum_1.EUserStatus.inactive
     }
 });
+userSchema.statics = {
+    async createUserWithHashPassword(userObject = {}) {
+        const hashPassword = await services_1.passwordService.hash(userObject.password);
+        return this.create({ ...userObject, password: hashPassword });
+    }
+};
+userSchema.methods = {
+    comparePasswords() {
+    }
+};
 exports.User = (0, mongoose_1.model)("user", userSchema);

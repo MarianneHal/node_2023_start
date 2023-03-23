@@ -5,7 +5,7 @@ import {User} from "../models/user.model";
 import {ICredentials} from "../types";
 import {tokenServices} from "./token.service";
 import {ITokenPair, ITokenPayload} from "../types";
-import {Token} from "../models/token.modele";
+import {Token} from "../models/token.model";
 import {emailService} from "./email.service";
 import {EEmailActions} from "../Enums/email.enum";
 import {EActionTokenType} from "../Enums/action.enum";

@@ -1,8 +1,10 @@
-import { model, Schema} from "mongoose";
-import {EGenders} from "../types/user.types";
+import { model, Schema, Model} from "mongoose";
+import {EGenders, IUser} from "../types";
 import {EUserStatus} from "../Enums/status.enum";
+import {passwordService} from "../services";
 
 const userSchema = new Schema({
+
     name: {
         type: String,
         required: true
@@ -31,4 +33,25 @@ const userSchema = new Schema({
     }
 });
 
-export const User = model("user", userSchema)
+interface IUserMethods {
+    comparePassword():void
+}
+
+interface IUserModel extends Model<IUser, object, IUserMethods>{
+    createUserWithHashPassword(userObject: object): Promise<void>
+}
+
+userSchema.statics = {
+   async createUserWithHashPassword(userObject={}): Promise<void> {
+        const hashPassword = await passwordService.hash(userObject.password);
+        return this.create({...userObject, password: hashPassword});
+    }
+}
+
+userSchema.methods = {
+    comparePasswords() {
+
+    }
+}
+
+export const User = model<IUser, IUserModel>("user", userSchema)
