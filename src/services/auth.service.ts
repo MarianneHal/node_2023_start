@@ -14,17 +14,6 @@ import {EUserStatus} from "../Enums/status.enum";
 import {OldPassword} from "../models/Old.password.model";
 
 class AuthService {
-    public async register(body: IUser): Promise<void> {
-        try{
-            const {password} = body;
-           const hashedPassword = await passwordService.hash(password);
-           await User.create({...body, password:hashedPassword})
-
-            //await emailService.sendMail(body.email, EEmailActions.WELCOME)
-        } catch (e){
-            throw new ApiError('User is already', 404)
-        }
-    }
 
     public async login(credentials: ICredentials, user: IUser):Promise<ITokenPair> {
         try{
@@ -34,7 +23,8 @@ class AuthService {
             if(!isMatched) {
                 throw new ApiError('Invalid date', 404)
             }
-        const tokenPair = tokenServices.generateTokenPair({name: user.name, _id: user._id})
+        // @ts-ignore
+            const tokenPair = tokenServices.generateTokenPair({name: user.name, _id: user._id})
             await Token.create({
                 _user_id: user._id,
                 ...tokenPair

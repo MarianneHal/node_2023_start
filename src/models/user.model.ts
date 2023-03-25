@@ -1,10 +1,10 @@
 import { model, Schema, Model} from "mongoose";
+
 import {EGenders, IUser} from "../types";
 import {EUserStatus} from "../Enums/status.enum";
-import {passwordService} from "../services";
+import bcrypt from "bcrypt";
 
 const userSchema = new Schema({
-
     name: {
         type: String,
         required: true
@@ -43,15 +43,13 @@ interface IUserModel extends Model<IUser, object, IUserMethods>{
 
 userSchema.statics = {
    async createUserWithHashPassword(userObject={}): Promise<void> {
-        const hashPassword = await passwordService.hash(userObject.password);
+        const hashPassword = await bcrypt.hash(userObject.password, 1);
         return this.create({...userObject, password: hashPassword});
     }
 }
 
 userSchema.methods = {
-    comparePasswords() {
 
-    }
 }
 
 export const User = model<IUser, IUserModel>("user", userSchema)

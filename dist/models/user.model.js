@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const mongoose_1 = require("mongoose");
 const types_1 = require("../types");
 const status_enum_1 = require("../Enums/status.enum");
-const services_1 = require("../services");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const userSchema = new mongoose_1.Schema({
     name: {
         type: String,
@@ -34,12 +37,9 @@ const userSchema = new mongoose_1.Schema({
 });
 userSchema.statics = {
     async createUserWithHashPassword(userObject = {}) {
-        const hashPassword = await services_1.passwordService.hash(userObject.password);
+        const hashPassword = await bcrypt_1.default.hash(userObject.password, 1);
         return this.create({ ...userObject, password: hashPassword });
     }
 };
-userSchema.methods = {
-    comparePasswords() {
-    }
-};
+userSchema.methods = {};
 exports.User = (0, mongoose_1.model)("user", userSchema);

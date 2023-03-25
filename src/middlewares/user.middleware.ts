@@ -5,7 +5,8 @@ import {isObjectIdOrHexString} from "mongoose"
 import {User} from "../models/user.model";
 import {ApiError} from "../errors/api.error";
 import {UserValidator} from "../validators/user.validator";
-import {IRequest} from "../types/common.types";
+import {IRequest} from "../types";
+
 
 
 class UserMiddleware {
@@ -28,16 +29,14 @@ class UserMiddleware {
         }
     }
 
-    public getDynamicallyAndThrow(fieldName: string, from= 'body', dbField = fieldName) {
-        return async (req: IRequest, res: Response, next: NextFunction)=> {
+    public getDynamicallyAndThrow(fieldName: string, from: 'body' | 'query' | 'params' = 'body', dbField = fieldName) {
+        return async (req: Request, res: Response, next: NextFunction)=> {
 
         try{
             const fieldValue = req[from][fieldName]
-
             const user = await User.findOne({[dbField]:fieldValue})
-
             if (user){
-                throw new ApiError('Not Found', 409)
+                throw new ApiError('Already exist', 409)
             }
           next();
         }catch (e) {
@@ -57,7 +56,6 @@ class UserMiddleware {
                 if (!user){
                     throw new ApiError('Not Found', 404)
                 }
-
                 req.res.locals = {user};
                 next();
             }catch (e) {

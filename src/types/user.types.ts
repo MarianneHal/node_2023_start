@@ -1,3 +1,5 @@
+import {Types} from "mongoose";
+
 export enum EGenders {
     male = 'male',
     female = 'female',
@@ -5,7 +7,7 @@ export enum EGenders {
 }
 
 export interface IUser {
-    _id:string
+    _id:Types.ObjectId
     name: string,
     email: string,
     password: string,

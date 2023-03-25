@@ -5,7 +5,7 @@ const api_error_1 = require("../errors/api.error");
 const password_service_1 = require("./password.service");
 const user_model_1 = require("../models/user.model");
 const token_service_1 = require("./token.service");
-const token_modele_1 = require("../models/token.modele");
+const token_model_1 = require("../models/token.model");
 const email_service_1 = require("./email.service");
 const email_enum_1 = require("../Enums/email.enum");
 const action_enum_1 = require("../Enums/action.enum");
@@ -13,16 +13,6 @@ const actionToken_model_1 = require("../models/actionToken.model");
 const status_enum_1 = require("../Enums/status.enum");
 const Old_password_model_1 = require("../models/Old.password.model");
 class AuthService {
-    async register(body) {
-        try {
-            const { password } = body;
-            const hashedPassword = await password_service_1.passwordService.hash(password);
-            await user_model_1.User.create({ ...body, password: hashedPassword });
-        }
-        catch (e) {
-            throw new api_error_1.ApiError('User is already', 404);
-        }
-    }
     async login(credentials, user) {
         try {
             const isMatched = await password_service_1.passwordService.compare(credentials.password, user.password);
@@ -30,7 +20,7 @@ class AuthService {
                 throw new api_error_1.ApiError('Invalid date', 404);
             }
             const tokenPair = token_service_1.tokenServices.generateTokenPair({ name: user.name, _id: user._id });
-            await token_modele_1.Token.create({
+            await token_model_1.Token.create({
                 _user_id: user._id,
                 ...tokenPair
             });
@@ -43,8 +33,8 @@ class AuthService {
     async refresh(tokenInfo, jwtPayload) {
         try {
             const tokenPair = token_service_1.tokenServices.generateTokenPair({ _id: jwtPayload._id, name: jwtPayload.name });
-            await Promise.all([token_modele_1.Token.create({ _user_id: jwtPayload._id, ...tokenPair }),
-                token_modele_1.Token.deleteOne({ refreshToken: tokenInfo.refreshToken })]);
+            await Promise.all([token_model_1.Token.create({ _user_id: jwtPayload._id, ...tokenPair }),
+                token_model_1.Token.deleteOne({ refreshToken: tokenInfo.refreshToken })]);
             return tokenPair;
         }
         catch (e) {
@@ -95,7 +85,7 @@ class AuthService {
         try {
             await Promise.all([
                 user_model_1.User.updateOne({ _id: userId }, { $set: { status: status_enum_1.EUserStatus.active } }),
-                token_modele_1.Token.deleteMany({
+                token_model_1.Token.deleteMany({
                     _user_id: userId,
                     tokenType: action_enum_1.EActionTokenType.activate,
                 }),

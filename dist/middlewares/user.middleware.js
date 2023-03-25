@@ -26,7 +26,7 @@ class UserMiddleware {
                 const fieldValue = req[from][fieldName];
                 const user = await user_model_1.User.findOne({ [dbField]: fieldValue });
                 if (user) {
-                    throw new api_error_1.ApiError('Not Found', 409);
+                    throw new api_error_1.ApiError('Already exist', 409);
                 }
                 next();
             }

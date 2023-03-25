@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
-const token_modele_1 = require("../models/token.modele");
+const token_model_1 = require("../models/token.model");
 const api_error_1 = require("../errors/api.error");
 const token_service_1 = require("../services/token.service");
 const token_enum_1 = require("../Enums/token.enum");
@@ -17,7 +17,7 @@ class AuthMiddleware {
                 throw new api_error_1.ApiError('No token', 401);
             }
             const jwtPayload = token_service_1.tokenServices.checkToken(accessToken, token_enum_1.ETokenType.access);
-            const tokenInfo = await token_modele_1.Token.findOne({ accessToken });
+            const tokenInfo = await token_model_1.Token.findOne({ accessToken });
             if (!tokenInfo) {
                 throw new api_error_1.ApiError('Token is not valid', 401);
             }
@@ -35,7 +35,7 @@ class AuthMiddleware {
                 throw new api_error_1.ApiError('No token', 401);
             }
             const jwtPayload = token_service_1.tokenServices.checkToken(refreshToken, token_enum_1.ETokenType.refresh);
-            const tokenInfo = await token_modele_1.Token.findOne({ refreshToken });
+            const tokenInfo = await token_model_1.Token.findOne({ refreshToken });
             if (!tokenInfo) {
                 throw new api_error_1.ApiError('Token is not valid', 401);
             }
