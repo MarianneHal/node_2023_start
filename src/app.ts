@@ -1,11 +1,14 @@
-import express, {NextFunction, Response, Request} from 'express'
+import express, {NextFunction, Response, Request} from 'express';
+import {config} from "dotenv";
 import * as mongoose from "mongoose";
 
+config();
 
 import {userRouter} from "./routers/user.router";
-import {IError} from "./types/common.types";
+import {IError} from "./types";
 import {authRouter} from "./routers/auth.router";
 import {cronRunner} from "./crons";
+import {configs} from "./configs/configs";
 
 
 const app = express();
@@ -17,7 +20,6 @@ app.use('/users', userRouter)
 app.use('/auth', authRouter)
 
 app.use((err:IError, req: Request, res:Response, next: NextFunction) => {
-    // @ts-ignore
     const status = err.status;
 
     res.status(status).json({
@@ -26,10 +28,9 @@ app.use((err:IError, req: Request, res:Response, next: NextFunction) => {
     })
 });
 
-const PORT = 5100;
 
-app.listen(PORT, () => {
+app.listen(configs.PORT, () => {
     mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority')
     cronRunner()
-    console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
+    console.log(`Server has started on PORT ${process.env.PORT} 🚀🚀🚀`);
 });

@@ -43,7 +43,7 @@ class UserController {
     public async delete(req: Request, res: Response, next: NextFunction): Promise<Response<ICommonResponse<IUser>>>{
         const { userId } = req.params;
         await User.deleteOne({_id: userId})
-       return  res.status(200).json({
+       return  res.sendStatus(200).json({
             massage: "User deleted"
         })
     }

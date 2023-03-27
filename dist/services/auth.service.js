@@ -13,6 +13,22 @@ const actionToken_model_1 = require("../models/actionToken.model");
 const status_enum_1 = require("../Enums/status.enum");
 const Old_password_model_1 = require("../models/Old.password.model");
 class AuthService {
+    async register(body) {
+        try {
+            const { password } = body;
+            const hashedPassword = await password_service_1.passwordService.hash(password);
+            await user_model_1.User.create({
+                ...body,
+                password: hashedPassword,
+            });
+            await Promise.all([
+                email_service_1.emailService.sendMail(body.email, email_enum_1.EEmailActions.WELCOME),
+            ]);
+        }
+        catch (e) {
+            throw new api_error_1.ApiError(e.message, e.status);
+        }
+    }
     async login(credentials, user) {
         try {
             const isMatched = await password_service_1.passwordService.compare(credentials.password, user.password);
@@ -51,6 +67,20 @@ class AuthService {
             });
             await email_service_1.emailService.sendMail(user.email, email_enum_1.EEmailActions.FORGOT_PASSWORD, { token: actionToken });
             await Old_password_model_1.OldPassword.create({ _user_id: user._id, password: user.password });
+        }
+        catch (e) {
+            throw new api_error_1.ApiError(e.message, e.status);
+        }
+    }
+    async changePassword(userId, oldPassword, newPassword) {
+        try {
+            const user = await user_model_1.User.findById(userId);
+            const isMatched = await password_service_1.passwordService.compare(oldPassword, user.password);
+            if (!isMatched) {
+                throw new api_error_1.ApiError("Wrong Old password", 400);
+            }
+            const hashedNewPassword = await password_service_1.passwordService.hash(newPassword);
+            await user_model_1.User.updateOne({ _id: user._id }, { password: hashedNewPassword });
         }
         catch (e) {
             throw new api_error_1.ApiError(e.message, e.status);

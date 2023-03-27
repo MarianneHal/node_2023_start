@@ -4,7 +4,7 @@ import {User} from "./user.model";
 import {EActionTokenType} from "../Enums/action.enum";
 
 
-const actionTokenShema = new Schema(
+const actionTokenSchema = new Schema(
     {
         _user_id: {
             type: Types.ObjectId,
@@ -26,4 +26,4 @@ const actionTokenShema = new Schema(
     }
 )
 
-export const Action = model("Action", actionTokenShema);
+export const Action = model("Action", actionTokenSchema);

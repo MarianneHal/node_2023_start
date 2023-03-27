@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-// @ts-ignore
 import { ObjectSchema } from "joi";
 import { isObjectIdOrHexString } from "mongoose";
 

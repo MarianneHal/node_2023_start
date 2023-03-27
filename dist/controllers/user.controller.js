@@ -35,7 +35,7 @@ class UserController {
     async delete(req, res, next) {
         const { userId } = req.params;
         await user_model_1.User.deleteOne({ _id: userId });
-        return res.status(200).json({
+        return res.sendStatus(200).json({
             massage: "User deleted"
         });
     }

@@ -5,7 +5,6 @@ const token_model_1 = require("../models/token.model");
 const api_error_1 = require("../errors/api.error");
 const token_service_1 = require("../services/token.service");
 const token_enum_1 = require("../Enums/token.enum");
-const action_enum_1 = require("../Enums/action.enum");
 const actionToken_model_1 = require("../models/actionToken.model");
 const Old_password_model_1 = require("../models/Old.password.model");
 const password_service_1 = require("../services/password.service");
@@ -46,23 +45,6 @@ class AuthMiddleware {
             next(e);
         }
     }
-    async checkActiinForgotToken(req, res, next) {
-        try {
-            const actionToken = req.params.token;
-            if (!actionToken)
-                throw new api_error_1.ApiError("No token", 401);
-            const jwtPayload = token_service_1.tokenServices.checkActionToken(actionToken, action_enum_1.EActionTokenType.forgot);
-            const tokenInfo = await actionToken_model_1.Action.findOne({ actionToken });
-            if (!tokenInfo) {
-                throw new api_error_1.ApiError("Token is not valid", 401);
-            }
-            req.res.locals = { tokenInfo, jwtPayload };
-            next();
-        }
-        catch (e) {
-            next(e);
-        }
-    }
     checkActionToken(type) {
         return async (req, res, next) => {
             try {
@@ -89,7 +71,7 @@ class AuthMiddleware {
             const { tokenInfo } = res.locals;
             const oldPasswords = await Old_password_model_1.OldPassword.find({ _user_id: tokenInfo._user_id });
             if (!oldPasswords)
-                next();
+                return next();
             await Promise.all(oldPasswords.map(async (record) => {
                 const isMatched = await password_service_1.passwordService.compare(body.password, record.password);
                 if (isMatched) {

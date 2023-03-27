@@ -27,10 +27,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const dotenv_1 = require("dotenv");
 const mongoose = __importStar(require("mongoose"));
+(0, dotenv_1.config)();
 const user_router_1 = require("./routers/user.router");
 const auth_router_1 = require("./routers/auth.router");
 const crons_1 = require("./crons");
+const configs_1 = require("./configs/configs");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -43,9 +46,8 @@ app.use((err, req, res, next) => {
         status
     });
 });
-const PORT = 5100;
-app.listen(PORT, () => {
+app.listen(configs_1.configs.PORT, () => {
     mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority');
     (0, crons_1.cronRunner)();
-    console.log(`Server has started on PORT ${PORT} 🚀🚀🚀`);
+    console.log(`Server has started on PORT ${process.env.PORT} 🚀🚀🚀`);
 });

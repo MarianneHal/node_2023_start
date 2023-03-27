@@ -14,6 +14,22 @@ import {EUserStatus} from "../Enums/status.enum";
 import {OldPassword} from "../models/Old.password.model";
 
 class AuthService {
+    public async register(body: IUser): Promise<void> {
+        try {
+            const { password } = body;
+            const hashedPassword = await passwordService.hash(password);
+            await User.create({
+                ...body,
+                password: hashedPassword,
+            });
+            await Promise.all([
+                // smsService.sendSms(body.phone, ESmsActionEnum.WELCOME),
+                emailService.sendMail(body.email, EEmailActions.WELCOME),
+            ]);
+        } catch (e) {
+            throw new ApiError(e.message, e.status);
+        }
+    }
 
     public async login(credentials: ICredentials, user: IUser):Promise<ITokenPair> {
         try{
@@ -23,7 +39,8 @@ class AuthService {
             if(!isMatched) {
                 throw new ApiError('Invalid date', 404)
             }
-        // @ts-ignore
+
+            // @ts-ignore
             const tokenPair = tokenServices.generateTokenPair({name: user.name, _id: user._id})
             await Token.create({
                 _user_id: user._id,
@@ -32,10 +49,11 @@ class AuthService {
 
             return tokenPair
     } catch(e) {
-            // @ts-ignore
+
             throw new ApiError(e.message, e.status)
         }
     }
+
     public async refresh(tokenInfo: ITokenPair, jwtPayload: ITokenPayload):Promise<ITokenPair> {
         try{
 
@@ -74,6 +92,30 @@ class AuthService {
         }
     }
 
+    public async changePassword(
+        userId:string,
+        oldPassword:string,
+        newPassword:string
+    ): Promise<void> {
+        try{
+            const user = await User.findById(userId);
+
+            const isMatched = await passwordService.compare(
+                oldPassword,
+                user.password
+            );
+            if (!isMatched) {
+                throw new ApiError("Wrong Old password", 400);
+            }
+            const hashedNewPassword = await passwordService.hash(newPassword);
+            await User.updateOne({_id:user._id}, {password: hashedNewPassword})
+        }catch (e) {
+            throw new ApiError(e.message, e.status)
+        }
+    }
+
+
+
     public async setForgotPassword(password: string, id:string): Promise<void>{
         try{
             const hashedPassword = await passwordService.hash(password)
@@ -81,7 +123,6 @@ class AuthService {
             await User.updateOne({_id: id}, {password: hashedPassword})
 
         }catch (e) {
-            // @ts-ignore
             throw new ApiError(e.message, e.status);
         }
     }

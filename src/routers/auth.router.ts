@@ -10,47 +10,45 @@ import {EActionTokenType} from "../Enums/action.enum";
 const router = Router();
 
 router.post('/register',
-    userMiddleware.isUserValidCreate,
+    commonMiddleware.isBodyValid(UserValidator.creatUser),
     userMiddleware.getDynamicallyAndThrow('email'),
-    authController.register)
+    authController.register);
 
 router.post('/login',
-        userMiddleware.isValidLogin,
+        commonMiddleware.isBodyValid(UserValidator.loginUser),
         userMiddleware.getDynamicallyOrThrow('email'),
-        authController.login )
+        authController.login);
 
-router.post('/login')
+router.post('/password/change',
+    commonMiddleware.isBodyValid(UserValidator.changeUserPassword),
+    authMiddleware.checkAccessToken,
+    authController.changePassword);
 
 router.post('/password/forgot',
-    userMiddleware.getDynamicallyOrThrow('email'),
-    authController.forgotPassword
-    )
-
+    commonMiddleware.isBodyValid(UserValidator.emailValidator),
+    userMiddleware.getDynamicallyOrThrow("email"),
+    authController.forgotPassword);
 
 router.put(
     '/password/forgot/:token',
-    authMiddleware.checkActiinForgotToken,
+    authMiddleware.checkActionToken(EActionTokenType.forgot),
     authMiddleware.checkOldPassword,
-    authController.setForgotPassword
-)
+    authController.setForgotPassword);
 
 router.post(
     "/activate",
     commonMiddleware.isBodyValid(UserValidator.emailValidator),
     userMiddleware.getDynamicallyOrThrow("email"),
-    authController.sendActivateToken
-);
+    authController.sendActivateToken);
 
 router.put(
     `/activate/:token`,
     authMiddleware.checkActionToken(EActionTokenType.activate),
-    authController.activate
-);
+    authController.activate);
 
 router.post(
     "/refresh",
     authMiddleware.checkRefreshToken,
-    authController.refresh
-);
+    authController.refresh);
 
 export const authRouter = router;
