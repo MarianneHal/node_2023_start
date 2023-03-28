@@ -12,7 +12,8 @@ export interface IUser {
     email: string,
     password: string,
     gender: string,
-    status:string
+    status:string,
+    avatar:string
 }
 
 export interface ICommonResponse<T> {

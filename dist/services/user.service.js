@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
 const api_error_1 = require("../errors/api.error");
 const user_model_1 = require("../models/user.model");
+const s3_service_1 = require("./s3.service");
 class UserService {
     async getWithPagination(query) {
         try {
@@ -19,6 +20,15 @@ class UserService {
                 itemsFound: users.length,
                 data: users
             };
+        }
+        catch (e) {
+            throw new api_error_1.ApiError(e.message, e.status);
+        }
+    }
+    async uploadAvatar(file, userId) {
+        try {
+            const filePath = await s3_service_1.s3Service.uploadPhoto(file, "user", userId);
+            return await user_model_1.User.findByIdAndUpdate(userId, { avatar: filePath }, { new: true });
         }
         catch (e) {
             throw new api_error_1.ApiError(e.message, e.status);

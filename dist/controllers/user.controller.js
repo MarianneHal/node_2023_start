@@ -39,5 +39,16 @@ class UserController {
             massage: "User deleted"
         });
     }
+    async uploadAvatar(req, res, next) {
+        try {
+            const { userId } = req.params;
+            const avatar = req.files.avatar;
+            const user = await services_1.userService.uploadAvatar(avatar, userId);
+            return res.status(201).json(user);
+        }
+        catch (e) {
+            next(e);
+        }
+    }
 }
 exports.userController = new UserController();

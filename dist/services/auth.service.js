@@ -21,9 +21,6 @@ class AuthService {
                 ...body,
                 password: hashedPassword,
             });
-            await Promise.all([
-                email_service_1.emailService.sendMail(body.email, email_enum_1.EEmailActions.WELCOME),
-            ]);
         }
         catch (e) {
             throw new api_error_1.ApiError(e.message, e.status);

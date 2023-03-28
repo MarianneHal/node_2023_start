@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = require("dotenv");
 const mongoose = __importStar(require("mongoose"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 (0, dotenv_1.config)();
 const user_router_1 = require("./routers/user.router");
 const auth_router_1 = require("./routers/auth.router");
@@ -37,6 +38,7 @@ const configs_1 = require("./configs/configs");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, express_fileupload_1.default)());
 app.use('/users', user_router_1.userRouter);
 app.use('/auth', auth_router_1.authRouter);
 app.use((err, req, res, next) => {

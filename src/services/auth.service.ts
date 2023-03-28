@@ -22,10 +22,10 @@ class AuthService {
                 ...body,
                 password: hashedPassword,
             });
-            await Promise.all([
+           // await Promise.all([
                 // smsService.sendSms(body.phone, ESmsActionEnum.WELCOME),
-                emailService.sendMail(body.email, EEmailActions.WELCOME),
-            ]);
+              //  emailService.sendMail(body.email, EEmailActions.WELCOME),
+          //  ]);
         } catch (e) {
             throw new ApiError(e.message, e.status);
         }

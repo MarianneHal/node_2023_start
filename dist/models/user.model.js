@@ -33,6 +33,10 @@ const userSchema = new mongoose_1.Schema({
         type: String,
         enum: status_enum_1.EUserStatus,
         default: status_enum_1.EUserStatus.inactive
+    },
+    avatar: {
+        type: String,
+        required: false,
     }
 });
 userSchema.statics = {

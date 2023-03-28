@@ -2,13 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authController = void 0;
 const services_1 = require("../services");
-const user_model_1 = require("../models/user.model");
 class AuthController {
     async register(req, res, next) {
         try {
-            await user_model_1.User.createUserWithHashPassword(req.body);
+            await services_1.authService.register(req.body);
             res.sendStatus(201);
-            next();
         }
         catch (e) {
             next(e);

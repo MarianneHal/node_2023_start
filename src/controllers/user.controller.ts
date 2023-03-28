@@ -1,4 +1,5 @@
 import {NextFunction, Request, Response} from "express";
+import {UploadedFile} from "express-fileupload";
 
 import {User} from "../models/user.model";
 import {ICommonResponse, IUser} from "../types";
@@ -46,6 +47,23 @@ class UserController {
        return  res.sendStatus(200).json({
             massage: "User deleted"
         })
+    }
+
+    public async uploadAvatar(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response<void>> {
+        try {
+            const { userId } = req.params;
+            const avatar = req.files.avatar as UploadedFile;
+
+            const user = await userService.uploadAvatar(avatar, userId);
+
+            return res.status(201).json(user);
+        } catch (e) {
+            next(e);
+        }
     }
 }
 

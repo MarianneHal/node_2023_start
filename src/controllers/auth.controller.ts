@@ -2,21 +2,18 @@ import {NextFunction, Response, Request} from "express";
 
 import {authService} from "../services";
 import {IUser} from "../types";
-import {User} from "../models/user.model";
 import {ITokenPayload} from "../types";
 
 
 class AuthController {
-    public async register(
-        req:Request,
-        res: Response,
-        next: NextFunction){
-        try{
-            await User.createUserWithHashPassword(req.body)
-            res.sendStatus(201)
-            next()
-        }catch (e){
-            next(e)
+
+    public async register(req: Request, res: Response, next: NextFunction) {
+        try {
+            await authService.register(req.body);
+
+            res.sendStatus(201);
+        } catch (e) {
+            next(e);
         }
     }
 
