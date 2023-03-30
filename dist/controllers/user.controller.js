@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userController = void 0;
 const user_model_1 = require("../models/user.model");
 const services_1 = require("../services");
+const mappers_1 = require("../mappers");
 class UserController {
     async getAll(req, res, next) {
         const users = await services_1.userService.getWithPagination(req.query);
@@ -45,6 +46,17 @@ class UserController {
             const avatar = req.files.avatar;
             const user = await services_1.userService.uploadAvatar(avatar, userId);
             return res.status(201).json(user);
+        }
+        catch (e) {
+            next(e);
+        }
+    }
+    async deleteAvatar(req, res, next) {
+        try {
+            const userEntity = res.locals.user;
+            const user = await services_1.userService.deleteAvatar(userEntity);
+            const response = mappers_1.userMapper.toResponse(user);
+            return res.status(201).json(response);
         }
         catch (e) {
             next(e);

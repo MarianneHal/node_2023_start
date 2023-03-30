@@ -24,6 +24,12 @@ class S3Service {
             ACL: configs_1.configs.AWS_S3_ACL }));
         return `${configs_1.configs.AWS_S3_BUCKET_URL}/${filePath}`;
     }
+    async deletePhoto(filePath) {
+        await this.client.send(new client_s3_1.DeleteObjectCommand({
+            Bucket: configs_1.configs.AWS_S3_BUCKET_NAME,
+            Key: filePath,
+        }));
+    }
     buildPath(fileName, itemType, itemId) {
         return `${itemType}/${itemId}/${uuid_1.v4}/${(0, node_path_1.extname)(fileName)}`;
     }

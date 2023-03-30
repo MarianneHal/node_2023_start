@@ -1,4 +1,4 @@
-import {S3Client, PutObjectCommand} from "@aws-sdk/client-s3";
+import {S3Client, PutObjectCommand,  DeleteObjectCommand} from "@aws-sdk/client-s3";
 import{extname} from "node:path";
 import {v4} from "uuid";
 
@@ -25,6 +25,16 @@ class S3Service {
        );
        return `${configs.AWS_S3_BUCKET_URL}/${filePath}`
     }
+
+    public async deletePhoto(filePath: string): Promise<void> {
+        await this.client.send(
+            new DeleteObjectCommand({
+                Bucket: configs.AWS_S3_BUCKET_NAME,
+                Key: filePath,
+            })
+        );
+    }
+
     private buildPath(fileName:string, itemType:string, itemId:string):string{
 
         return `${itemType}/${itemId}/${v4}/${extname(fileName)}`;

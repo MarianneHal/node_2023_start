@@ -53,6 +53,23 @@ class UserService {
             throw new ApiError(e.message, e.status);
         }
     }
+    public async deleteAvatar(user: IUser): Promise<IUser> {
+        try {
+            if (!user.avatar) {
+                throw new ApiError("User doesnt have avatar", 422);
+            }
+
+            await s3Service.deletePhoto(user.avatar);
+
+            return await User.findByIdAndUpdate(
+                user._id,
+                { $unset: { avatar: true } },
+                { new: true }
+            );
+        } catch (e) {
+            throw new ApiError(e.message, e.status);
+        }
+    }
 }
 
 export const userService = new UserService();

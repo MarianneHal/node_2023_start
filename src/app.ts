@@ -1,7 +1,9 @@
-import express, {NextFunction, Response, Request} from 'express';
+import express, {NextFunction, Response, Request, Application} from 'express';
 import {config} from "dotenv";
 import * as mongoose from "mongoose";
 import fileUploader from "express-fileupload";
+import {Server, Socket} from "socket.io";
+import * as http from "http"
 
 config();
 
@@ -13,7 +15,18 @@ import {configs} from "./configs/configs";
 
 
 
-const app = express();
+const app: Application = express();
+const server = http.createServer(app);
+
+const io = new Server(server, {
+    cors:{
+        origin: "*"
+    }
+});
+
+io.on('connection', (socket:Socket)=>{
+    socket.emit('message', {message:'hello'})
+})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
@@ -32,7 +45,7 @@ app.use((err:IError, req: Request, res:Response, next: NextFunction) => {
 });
 
 
-app.listen(configs.PORT, () => {
+server.listen(configs.PORT, () => {
     mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority')
     cronRunner()
     console.log(`Server has started on PORT ${process.env.PORT} 🚀🚀🚀`);

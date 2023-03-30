@@ -30,12 +30,23 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = require("dotenv");
 const mongoose = __importStar(require("mongoose"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
+const socket_io_1 = require("socket.io");
+const http = __importStar(require("http"));
 (0, dotenv_1.config)();
 const user_router_1 = require("./routers/user.router");
 const auth_router_1 = require("./routers/auth.router");
 const crons_1 = require("./crons");
 const configs_1 = require("./configs/configs");
 const app = (0, express_1.default)();
+const server = http.createServer(app);
+const io = new socket_io_1.Server(server, {
+    cors: {
+        origin: "*"
+    }
+});
+io.on('connection', (socket) => {
+    socket.emit('message', { message: 'hello' });
+});
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, express_fileupload_1.default)());
@@ -48,7 +59,7 @@ app.use((err, req, res, next) => {
         status
     });
 });
-app.listen(configs_1.configs.PORT, () => {
+server.listen(configs_1.configs.PORT, () => {
     mongoose.connect('mongodb+srv://marianne30011999:hrMYYOvSyTAgi4PR@sept-2022.2ipnwag.mongodb.net/?retryWrites=true&w=majority');
     (0, crons_1.cronRunner)();
     console.log(`Server has started on PORT ${process.env.PORT} 🚀🚀🚀`);

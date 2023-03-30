@@ -4,6 +4,7 @@ import {UploadedFile} from "express-fileupload";
 import {User} from "../models/user.model";
 import {ICommonResponse, IUser} from "../types";
 import {userService} from "../services";
+import {userMapper} from "../mappers";
 
 
 class UserController {
@@ -65,6 +66,25 @@ class UserController {
             next(e);
         }
     }
+    public async deleteAvatar(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<Response<IUser>> {
+        try {
+            const userEntity = res.locals.user as IUser;
+
+            const user = await userService.deleteAvatar(userEntity);
+
+            const response = userMapper.toResponse(user);
+
+            return res.status(201).json(response);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
+
+
 
 export const userController = new UserController();
